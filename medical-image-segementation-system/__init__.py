@@ -41,7 +41,6 @@ def del_files(dir_path):
         for name in dirs:
             os.rmdir(os.path.join(root, name))  # 删除一个空目录
 
-
 # 主页
 @app.route('/')
 def hello():
@@ -59,7 +58,7 @@ def upload_test():
     global pic_path, res_pic_path
     pic_path = 'assets/img/svg/illustrations/illustration-3.svg'
     res_pic_path = 'assets/img/svg/illustrations/illustration-7.svg'
-    return render_template('liveExperience.html', pic_path=pic_path, res_pic_path=res_pic_path)
+    return render_template('live/liveExperience.html', pic_path=pic_path, res_pic_path=res_pic_path)
 
 
 @app.route('/liveExperience/upload_success', methods=['POST'])
@@ -78,7 +77,7 @@ def upload_pic():
     src_img = cv.imread('static/' + pic_path)
     src_img = cv.cvtColor(src_img, cv.COLOR_BGR2GRAY)
 
-    return render_template('liveExperience.html', pic_path=pic_path, res_pic_path=res_pic_path)
+    return render_template('live/liveExperience.html', pic_path=pic_path, res_pic_path=res_pic_path)
 
 
 @app.route('/liveExperience/upload_success', methods=['GET'])
@@ -200,7 +199,7 @@ def algorithm_process():
 
     # elif message_get == 'UNET':
 
-    return render_template('show.html', pic_path=pic_path, res_pic_path=res_pic_path, temp=message_get)
+    return render_template('live/show.html', pic_path=pic_path, res_pic_path=res_pic_path, temp=message_get)
 
 
 # 图片下载
@@ -220,7 +219,7 @@ def about():
 
 @app.route('/example/')
 def example_index():
-    return render_template('example-index.html')
+    return render_template('example/example-index.html')
 
 
 # 展示unet网络对不同数据集的分割效果
@@ -241,7 +240,7 @@ def example_unet():
         reader = csv.reader(f)
         data5 = next(reader)
         data6 = next(reader)
-    return render_template('example-unet.html', data1=data1, data2=data2, data3=data3, data4=data4, data5=data5,
+    return render_template('example/example-unet.html', data1=data1, data2=data2, data3=data3, data4=data4, data5=data5,
                            data6=data6)
 
 
@@ -257,7 +256,7 @@ def show_example_chest():
         data3 = next(reader)
         data4 = next(reader)
         data5 = next(reader)
-    return render_template('chest-index.html', header=header, data1=data1, data2=data2, data3=data3, data4=data4,
+    return render_template('example/chest/chest-index.html', header=header, data1=data1, data2=data2, data3=data3, data4=data4,
                            data5=data5)
 
 
@@ -273,7 +272,7 @@ def show_example_chest_otsu():
         data5 = next(reader)
         data6 = next(reader)
         data7 = next(reader)
-    return render_template('chest-otsu-show.html', data1=data1, data2=data2, data3=data3, data4=data4, data5=data5,
+    return render_template('example/chest/chest-otsu-show.html', data1=data1, data2=data2, data3=data3, data4=data4, data5=data5,
                            data6=data6, data7=data7)
 
 
@@ -289,7 +288,7 @@ def show_example_chest_fcm():
         data5 = next(reader)
         data6 = next(reader)
         data7 = next(reader)
-    return render_template('chest-fcm-show.html', data1=data1, data2=data2, data3=data3, data4=data4, data5=data5,
+    return render_template('example/chest/chest-fcm-show.html', data1=data1, data2=data2, data3=data3, data4=data4, data5=data5,
                            data6=data6, data7=data7)
 
 
@@ -305,7 +304,7 @@ def show_example_chest_drlse():
         data5 = next(reader)
         data6 = next(reader)
         data7 = next(reader)
-    return render_template('chest-drlse-show.html', data1=data1, data2=data2, data3=data3, data4=data4, data5=data5,
+    return render_template('example/chest/chest-drlse-show.html', data1=data1, data2=data2, data3=data3, data4=data4, data5=data5,
                            data6=data6, data7=data7)
 
 
@@ -321,7 +320,7 @@ def show_example_chest_unet():
         data5 = next(reader)
         data6 = next(reader)
         data7 = next(reader)
-    return render_template('chest-unet-show.html', data1=data1, data2=data2, data3=data3, data4=data4, data5=data5,
+    return render_template('example/chest/chest-unet-show.html', data1=data1, data2=data2, data3=data3, data4=data4, data5=data5,
                            data6=data6, data7=data7)
 
 
@@ -338,7 +337,7 @@ def show_example_eye():
         data4 = next(reader)
         data5 = next(reader)
         data6 = next(reader)
-    return render_template('eye-index.html', header=header, data1=data1, data2=data2, data3=data3, data4=data4,
+    return render_template('example/eye/eye-index.html', header=header, data1=data1, data2=data2, data3=data3, data4=data4,
                            data5=data5, data6=data6)
 
 
@@ -354,7 +353,7 @@ def show_example_eye_unet():
         data5 = next(reader)
         data6 = next(reader)
         data7 = next(reader)
-    return render_template('eye-unet-show.html', data1=data1, data2=data2, data3=data3, data4=data4, data5=data5,
+    return render_template('example/eye/eye-unet-show.html', data1=data1, data2=data2, data3=data3, data4=data4, data5=data5,
                            data6=data6, data7=data7)
 
 
@@ -370,7 +369,7 @@ def show_example_eye_otsu():
         data5 = next(reader)
         data6 = next(reader)
         data7 = next(reader)
-    return render_template('eye-otsu-show.html', data1=data1, data2=data2, data3=data3, data4=data4, data5=data5,
+    return render_template('example/eye/eye-otsu-show.html', data1=data1, data2=data2, data3=data3, data4=data4, data5=data5,
                            data6=data6, data7=data7)
 
 
@@ -385,7 +384,7 @@ def show_example_hippocampus():
         data2 = next(reader)
         data3 = next(reader)
         data4 = next(reader)
-    return render_template('hippocampus-index.html', header=header, data1=data1, data2=data2, data3=data3, data4=data4)
+    return render_template('example/hippocampus/hippocampus-index.html', header=header, data1=data1, data2=data2, data3=data3, data4=data4)
 
 
 @app.route('/example/hippocampus/otsu')
@@ -400,7 +399,7 @@ def show_example_hippocampus_otsu():
         data5 = next(reader)
         data6 = next(reader)
         data7 = next(reader)
-    return render_template('hippocampus-otsu-show.html', data1=data1, data2=data2, data3=data3, data4=data4,
+    return render_template('example/hippocampus/hippocampus-otsu-show.html', data1=data1, data2=data2, data3=data3, data4=data4,
                            data5=data5, data6=data6, data7=data7)
 
 
@@ -408,7 +407,7 @@ def show_example_hippocampus_otsu():
 def show_example_hippo_drlse():
     filepath = 'static/csv/hippocampus_drlse'
     data = os.listdir(filepath)
-    return render_template('hippocampus-drlse-show.html', data=data)
+    return render_template('example/hippocampus/hippocampus-drlse-show.html', data=data)
 
 
 @app.route('/example/hippocampus/unet')
@@ -423,7 +422,7 @@ def show_example_hippo_unet():
         data5 = next(reader)
         data6 = next(reader)
         data7 = next(reader)
-    return render_template('hippocampus-unet-show.html', data1=data1, data2=data2, data3=data3, data4=data4,
+    return render_template('example/hippocampus/hippocampus-unet-show.html', data1=data1, data2=data2, data3=data3, data4=data4,
                            data5=data5, data6=data6, data7=data7)
 
 
