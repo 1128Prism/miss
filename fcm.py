@@ -1,18 +1,8 @@
-import os
 import numpy as np
 
 C = 2
 M = 2
 EPSILON = 0.001
-images_file_path = 'D:\EXERCISE\hippocampus_part4\single_image_slice'
-labels_file_path = 'D:\EXERCISE\hippocampus_part4\single_label_slice'
-
-filename = os.listdir(images_file_path)
-DSI = {}
-VOE = {}
-RVD = {}
-Prevision = {}
-Recall = {}
 
 
 def get_init_fuzzy_mat(pixel_count):
