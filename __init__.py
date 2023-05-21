@@ -40,6 +40,7 @@ def del_files(dir_path):
         for name in dirs:
             os.rmdir(os.path.join(root, name))  # 删除一个空目录
 
+
 # 主页
 @app.route('/')
 def hello():
@@ -48,7 +49,12 @@ def hello():
 
 @app.errorhandler(404)
 def miss404(e):
-    return render_template('404.html'), 404
+    return render_template('errors/404.html'), 404
+
+
+@app.errorhandler(500)
+def miss500(e):
+    return render_template('errors/500.html'), 500
 
 
 # 图片上传相关
@@ -255,7 +261,8 @@ def show_example_chest():
         data3 = next(reader)
         data4 = next(reader)
         data5 = next(reader)
-    return render_template('example/chest/chest-index.html', header=header, data1=data1, data2=data2, data3=data3, data4=data4,
+    return render_template('example/chest/chest-index.html', header=header, data1=data1, data2=data2, data3=data3,
+                           data4=data4,
                            data5=data5)
 
 
@@ -271,7 +278,8 @@ def show_example_chest_otsu():
         data5 = next(reader)
         data6 = next(reader)
         data7 = next(reader)
-    return render_template('example/chest/chest-otsu-show.html', data1=data1, data2=data2, data3=data3, data4=data4, data5=data5,
+    return render_template('example/chest/chest-otsu-show.html', data1=data1, data2=data2, data3=data3, data4=data4,
+                           data5=data5,
                            data6=data6, data7=data7)
 
 
@@ -287,7 +295,8 @@ def show_example_chest_fcm():
         data5 = next(reader)
         data6 = next(reader)
         data7 = next(reader)
-    return render_template('example/chest/chest-fcm-show.html', data1=data1, data2=data2, data3=data3, data4=data4, data5=data5,
+    return render_template('example/chest/chest-fcm-show.html', data1=data1, data2=data2, data3=data3, data4=data4,
+                           data5=data5,
                            data6=data6, data7=data7)
 
 
@@ -303,7 +312,8 @@ def show_example_chest_drlse():
         data5 = next(reader)
         data6 = next(reader)
         data7 = next(reader)
-    return render_template('example/chest/chest-drlse-show.html', data1=data1, data2=data2, data3=data3, data4=data4, data5=data5,
+    return render_template('example/chest/chest-drlse-show.html', data1=data1, data2=data2, data3=data3, data4=data4,
+                           data5=data5,
                            data6=data6, data7=data7)
 
 
@@ -319,7 +329,8 @@ def show_example_chest_unet():
         data5 = next(reader)
         data6 = next(reader)
         data7 = next(reader)
-    return render_template('example/chest/chest-unet-show.html', data1=data1, data2=data2, data3=data3, data4=data4, data5=data5,
+    return render_template('example/chest/chest-unet-show.html', data1=data1, data2=data2, data3=data3, data4=data4,
+                           data5=data5,
                            data6=data6, data7=data7)
 
 
@@ -336,7 +347,8 @@ def show_example_eye():
         data4 = next(reader)
         data5 = next(reader)
         data6 = next(reader)
-    return render_template('example/eye/eye-index.html', header=header, data1=data1, data2=data2, data3=data3, data4=data4,
+    return render_template('example/eye/eye-index.html', header=header, data1=data1, data2=data2, data3=data3,
+                           data4=data4,
                            data5=data5, data6=data6)
 
 
@@ -352,7 +364,8 @@ def show_example_eye_unet():
         data5 = next(reader)
         data6 = next(reader)
         data7 = next(reader)
-    return render_template('example/eye/eye-unet-show.html', data1=data1, data2=data2, data3=data3, data4=data4, data5=data5,
+    return render_template('example/eye/eye-unet-show.html', data1=data1, data2=data2, data3=data3, data4=data4,
+                           data5=data5,
                            data6=data6, data7=data7)
 
 
@@ -368,7 +381,8 @@ def show_example_eye_otsu():
         data5 = next(reader)
         data6 = next(reader)
         data7 = next(reader)
-    return render_template('example/eye/eye-otsu-show.html', data1=data1, data2=data2, data3=data3, data4=data4, data5=data5,
+    return render_template('example/eye/eye-otsu-show.html', data1=data1, data2=data2, data3=data3, data4=data4,
+                           data5=data5,
                            data6=data6, data7=data7)
 
 
@@ -383,7 +397,8 @@ def show_example_hippocampus():
         data2 = next(reader)
         data3 = next(reader)
         data4 = next(reader)
-    return render_template('example/hippocampus/hippocampus-index.html', header=header, data1=data1, data2=data2, data3=data3, data4=data4)
+    return render_template('example/hippocampus/hippocampus-index.html', header=header, data1=data1, data2=data2,
+                           data3=data3, data4=data4)
 
 
 @app.route('/example/hippocampus/otsu')
@@ -398,7 +413,8 @@ def show_example_hippocampus_otsu():
         data5 = next(reader)
         data6 = next(reader)
         data7 = next(reader)
-    return render_template('example/hippocampus/hippocampus-otsu-show.html', data1=data1, data2=data2, data3=data3, data4=data4,
+    return render_template('example/hippocampus/hippocampus-otsu-show.html', data1=data1, data2=data2, data3=data3,
+                           data4=data4,
                            data5=data5, data6=data6, data7=data7)
 
 
@@ -421,7 +437,8 @@ def show_example_hippo_unet():
         data5 = next(reader)
         data6 = next(reader)
         data7 = next(reader)
-    return render_template('example/hippocampus/hippocampus-unet-show.html', data1=data1, data2=data2, data3=data3, data4=data4,
+    return render_template('example/hippocampus/hippocampus-unet-show.html', data1=data1, data2=data2, data3=data3,
+                           data4=data4,
                            data5=data5, data6=data6, data7=data7)
 
 
