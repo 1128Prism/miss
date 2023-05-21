@@ -1,3 +1,3 @@
 import os
 
-from MISSystem import app
+from MISS import app
