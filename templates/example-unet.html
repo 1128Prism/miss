@@ -1,0 +1,749 @@
+<!doctype html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="PrismIf">
+
+    <title>unet</title>
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/carousel/">
+
+    <link href={{url_for('static',filename='assets/libs/bootstrap/dist/css/bootstrap.min.css')}} rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link href={{url_for('static',filename='assets/css/unet.css')}} rel="stylesheet">
+    <!-- Favicon -->
+    <link rel="icon" href="{{url_for('static',filename='assets/img/brand/favicon.png')}}" type="image/png'">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="{{url_for('static',filename='assets/libs/@fortawesome/fontawesome-free/css/all.min.css')}}">
+    <!-- Quick CSS -->
+    <link rel="stylesheet" href="{{url_for('static', filename='assets/css/quick-website.css')}}" id="stylesheet">
+    <script type="text/javascript" src={{url_for('static',filename='assets/js/jump.js')}}></script>
+
+    <script>
+        window.addEventListener("load", function() {
+            setTimeout(function() {
+                document.querySelector('body').classList.add('loaded');
+            }, 300);
+        });
+    </script>
+  </head>
+  <body>
+    <!-- Preloader -->
+    <div class="preloader">
+        <div class="spinner-border text-primary" role="status">
+            <span class="sr-only">Loading...</span>
+        </div>
+    </div>
+    <div class="modal fade" tabindex="-1" role="dialog" id="modal-cookies" data-backdrop="false" aria-labelledby="modal-cookies" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-aside left-4 right-4 bottom-4">
+            <div class="modal-content bg-dark-dark">
+                <div class="modal-body">
+                    <!-- Text -->
+                    <p class="text-sm text-white mb-3">
+                        We use cookies so that our themes work for you. By using our website, you agree to our use of cookies.
+                    </p>
+                    <!-- Buttons -->
+                    <a href="www.github.com" class="btn btn-sm btn-white" target="_blank">Learn more</a>
+                    <button type="button" class="btn btn-sm btn-primary mr-2" data-dismiss="modal">OK</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white">
+        <div class="container">
+            <!-- Brand -->
+            <a class="navbar-brand" href="/">
+                <img alt="Image placeholder" src="{{url_for('static',filename='assets/img/brand/dark.svg')}}" id="navbar-logo">
+            </a>
+            <!-- Toggler -->
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <!-- Collapse -->
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <ul class="navbar-nav mt-4 mt-lg-0 ml-auto">
+                    <li class="nav-item ">
+                        <a class="nav-link" href="/">主页</a>
+                    </li>
+                    <li class="nav-item dropdown dropdown-animate" data-toggle="hover">
+                        <a class="nav-link" href="/about" target="_blank">医学图像分割算法简介</a>
+                    </li>
+                    <li class="nav-item dropdown dropdown-animate" data-toggle="hover">
+                        <a class="nav-link" href="/" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">案例展示</a>
+                        <div class="dropdown-menu dropdown-menu-single">
+                            <a href="/example" class="dropdown-item">医学图像常用数据集介绍</a>
+                            <a href="/example/chest" class="dropdown-item">胸部X光片数据集</a>
+                            <a href="/example/eye_drive" class="dropdown-item">眼底血管数据集</a>
+                            <a href="/example/hippocampus" class="dropdown-item">海马体数据集</a>
+                            <a href="/example/unet" class="dropdown-item">U-Net算法对不同数据集分割效果</a>
+                        </div>
+                    </li>
+                    <li class="nav-item ">
+                        <a class="nav-link" href="/liveExperience" target="_blank">实时体验</a>
+                    </li>
+                </ul>
+                <!-- Button -->
+                <a class="navbar-btn btn btn-sm btn-primary d-none d-lg-inline-block ml-3" href="https://github.com" target="_blank">
+                    更多
+                </a>
+                <!-- Mobile button -->
+                <div class="d-lg-none text-center">
+                    <a href="/live" class="btn btn-block btn-sm btn-warning">Live</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Content -->
+    <div class="container">
+        <div id="unetCarousel" class="carousel slide" data-ride="carousel">
+        <ol class="carousel-indicators">
+          <li data-target="#unetCarousel" data-slide-to="0" class="active"></li>
+          <li data-target="#unetCarousel" data-slide-to="1"></li>
+          <li data-target="#unetCarousel" data-slide-to="2"></li>
+          <li data-target="#unetCarousel" data-slide-to="3"></li>
+        </ol>
+            <div class="carousel-inner" role="listbox">
+                <!-- Slide One -->
+                <div class="carousel-item active" style="background-image: url({{url_for('static',filename='assets/img/pics/unet.png')}})">
+                    <div class="carousel-caption text-start">
+                       <h1>U-Net介绍</h1>
+                       <p>U-Net作为如今最为热门的医学图像分割算法到底有什么独到之处？</p>
+                       <p><a class="btn btn-lg btn-primary" href="javascript:void(0)" onclick="intro_jump()">点击查看</a></p>
+                    </div>
+                </div>
+                <!-- Slide Two -->
+                <div class="carousel-item" style="background-image: url({{url_for('static',filename='assets/img/pics/chest1.png')}})">
+                    <div class="carousel-caption text-end">
+                        <h1>胸部X射线图像数据集</h1>
+                        <p>胸部X射线数图像据集是一个最为简单直接的数据集，使用U-Net对其处理后效果如何？</p>
+                        <p><a class="btn btn-lg btn-primary"  href="javascript:void(0)" onclick="chest_jump()">点击查看</a></p>
+                    </div>
+                </div>
+                <!-- Slide Three -->
+                <div class="carousel-item" style="background-image:url({{url_for('static',filename='assets/img/pics/drive.jpg')}})">
+                    <div class="carousel-caption text-end">
+                        <h1>DRIVE眼底血管图像数据集</h1>
+                        <p>DRIVE作为测试网络模型最常见的数据集之一，和其他数据集相比有什么优势？</p>
+                        <p><a class="btn btn-lg btn-primary"  href="javascript:void(0)" onclick="DRIVE_jump()">点击查看</a></p>
+                    </div>
+                </div>
+                <!-- Slide Four -->
+                <div class="carousel-item" style="background-image: url({{url_for('static',filename='assets/img/pics/hippocampus.jpg')}})">
+                    <div class="carousel-caption text-end">
+                        <h1>Hippocampus MSD海马体数据集</h1>
+                        <p>Hippocampus是读取源数据最为困难的数据集，和其他数据集相比有什么优势？</p>
+                        <p><a class="btn btn-lg btn-primary"  href="javascript:void(0)" onclick="hippocampus_jump()">点击查看</a></p>
+                    </div>
+                </div>
+                <a class="carousel-control-prev" href="#unetCarousel" role="button" data-slide="prev">
+                  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                  <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next" href="#unetCarousel" role="button" data-slide="next">
+                  <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                  <span class="sr-only">Next</span>
+                </a>
+            </div>
+        </div>
+        <div id="div_intro" style="padding-top:2px">
+            <hr class="featurette-divider mb-3">
+            <div class="row featurette">
+              <div class="col-md-7">
+                <h2 class="featurette-heading">U-Net <span class="text-muted"> 神经网络模型</span></h2>
+                <p class="lead">U-Net包括编码器、瓶颈（bottleneck）模块、解码器几部分组成，其结构示意图如右图所示。
+                    U-Net网络结构左右对称，左侧是用于获取上下文信息的收缩路径，右侧是进行定位的扩张路径。
+                    以其独特的U型结构，U-Net能够使用较少的数据的同时快速结合上下文进行训练。
+                </p>
+              </div>
+              <div class="col-md-5">
+                 <img src={{url_for('static',filename='assets/img/pics/unet.jpg')}} width="445px"/>
+                  <h5 class="h6 mb-0" style="padding:50px 150px 0"> U-Net网络模型结构 </h5>
+              </div>
+              <!-- Card -->
+              <div class="row mt-5">
+                   <div class="col-md-4">
+                        <div class="card">
+                              <div class="card-body pb-5">
+                                   <div class="pt-4 pb-5">
+                                       <img src={{url_for('static',filename='assets/img/pics/unet1.png')}} class="img-fluid img-center" style="height: 150px;" alt="Illustration" />
+                                   </div>
+                                   <h5 class="h4 lh-130 mb-3">训练集图片通过预处理后转换为hdf5文件</h5>
+                                   <p class="text-muted mb-0">预处理步骤包括灰度变换、自适应直方图均衡化以及gamma变换等</p>
+                              </div>
+                         </div>
+                   </div>
+                  <div class="col-md-4">
+                        <div class="card">
+                              <div class="card-body pb-5">
+                                   <div class="pt-4 pb-5">
+                                       <img src={{url_for('static',filename='assets/img/pics/unet2.png')}} class="img-fluid img-center" style="height: 150px;" alt="Illustration" />
+                                   </div>
+                                   <h5 class="h4 lh-130 mb-3">利用keras库搭建unet读取hdf5文件迭代生成模型</h5>
+                                   <p class="text-muted mb-0">keras库依赖tensorflow，需要构建tensorflow的虚拟环境</p>
+                              </div>
+                        </div>
+                  </div>
+                  <div class="col-md-4">
+                       <div class="card">
+                            <div class="card-body pb-5">
+                                <div class="pt-4 pb-5">
+                                    <img src={{url_for('static',filename='assets/img/pics/unet3.png')}} class="img-fluid img-center" style="height: 150px;" alt="Illustration" />
+                                </div>
+                                <h5 class="h4 lh-130 mb-3">选择迭代对比后准确率最高的模型进行预测</h5>
+                                <p class="text-muted mb-0">进行预测时同样需要将预测图像转化为hdf5文件以便读入模型</p>
+                            </div>
+                       </div>
+                  </div>
+              </div>
+
+              <h2>unet神经网络<span class="text-muted">对不同数据集的处理结果</span></h2>
+              <div class="col-md-12">
+              <div class="card">
+                  <div class="card-body pb-4">
+                      <div class="table-responsive" style='height:420px;'>
+                            <table class="table table-striped table-sm">
+                              <thead>
+                                <tr>
+                                  <th style="text-align:center;vertical-align: middle"  scope="col">chest 数据集</th>
+                                  <th style="text-align:center;vertical-align: middle"  scope="col">DRIVE 数据集</th>
+                                  <th style="text-align:center;vertical-align: middle"  scope="col">hippocampus 数据集</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                              {% for i in range(0,9) %}
+                                    <tr>
+                                        <td style="text-align:center;vertical-align: middle" scope="col"><img height="80px" src={{url_for('static',filename='csv/chest_unet/'+data1[i])}}></td>
+                                        <td style="text-align:center;vertical-align: middle" scope="col"><img height="80px" src={{url_for('static',filename='csv/eye_unet/'+data3[i])}}></td>
+                                        <td style="text-align:center;vertical-align: middle" scope="col"><img height="80px" src={{url_for('static',filename='csv/hippocampus_unet/'+data5[i])}}></td>
+                                    </tr>
+                              {% endfor %}
+                              </tbody>
+                            </table>
+                      </div>
+                  </div>
+              </div>
+              <h5 class="h6 mb-4 text-muted" style="text-align:center">每个数据集选择9张图片进行预测，左侧为unet预测结果，右侧为数据集给出的groundTruth</h5>
+              </div>
+
+              <h6 class="heading mb-3">经过以上实验，我们可以得到：</h6>
+              <div class="col-lg-4 col-md-6 px-lg-4">
+                    <div class="card shadow-none">
+                        <div class="p-3 d-flex">
+                            <div>
+                                <div class="icon icon-shape rounded-circle bg-warning text-white mr-4">
+                                    <i class="fas fa-file-invoice"></i>
+                                </div>
+                            </div>
+                            <div>
+                                <p class="text-sm mb-0">
+                                   对于细节较多的数据集，将原图像随机切片越多越好，但同时也会消耗更多的时间。后续还可以对比划分不同大小和数量的切片对模型准确性的影响。
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+              <div class="col-lg-4 col-md-6 px-lg-4">
+                    <div class="card shadow-none">
+                        <div class="p-3 d-flex">
+                            <div>
+                                <div class="icon icon-shape rounded-circle bg-primary text-white mr-4">
+                                    <i class="fas fa-file-invoice"></i>
+                                </div>
+                            </div>
+                            <div>
+                                <p class="text-sm mb-0">
+                                    适用于将目标区域划分出来的数据集，如DRIVE眼底血管数据集。unet可以在学习目标区域细节的同时提取目标边界的划分细节，在预测时可以快速锁定目标区域减少时间。
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+              <div class="col-lg-4 col-md-6 px-lg-4">
+                    <div class="card shadow-none">
+                        <div class="p-3 d-flex">
+                            <div>
+                                <div class="icon icon-shape rounded-circle bg-danger text-white mr-4">
+                                    <i class="fas fa-file-invoice"></i>
+                                </div>
+                            </div>
+                            <div>
+                                <p class="text-sm mb-0">
+                                    迭代次数和准确率并没有必然联系，在训练时也可以发现很多无效的迭代次数。我们的目标便是找到时间内存消耗与模型准确率较为平衡的迭代次数。
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+              </div>
+            </div>
+        <!-- chest -->
+        <div id="div_chest" style="padding-top:4px">
+            <hr class="featurette-divider mb-4">
+              <div class="row featurette">
+              <div class="col-md-7">
+                <h2>chest <span class="text-muted">胸部X光图像数据集</span></h2>
+                <p class="lead">chest数据集的建立是为了对肺部细节进行比较研究。</p>
+                <p class="lead">chest数据集是一个最为简单直接的数据集，直接给出了原图与groundtruth。
+                    比较重要的预处理步骤在于需要用一个矩形去框选出感兴趣区域，使得unet处理更加高效快捷。</p>
+                <p class="lead">将每张图切割为400张，并同时将掩膜加入unet，使unet可以同时学习边界的处理，切割碎片如下</p>
+                <img src="{{url_for('static',filename='assets/img/pics/chest2.png')}}" height="200px" style="margin:20px"/>
+                <img src="{{url_for('static',filename='assets/img/pics/chest3.png')}}" height="200px" style="margin:20px"/>
+                <img src="{{url_for('static',filename='assets/img/pics/chest4.png')}}" height="200px" style="margin:20px"/>
+              </div>
+              <div class="col-md-5">
+                 <img src={{url_for('static',filename='assets/img/pics/chest.png')}} width="445px"/>
+                  <h5 class="h6 mb-0" style="padding:10px 160px 0"> chest数据集 </h5>
+              </div>
+              <div class="col-md-6">
+              <div class="card">
+                  <div class="card-body pb-4">
+                      <div id="container1" style='width:500px;height:420px;'></div>
+                  </div>
+              </div>
+              </div>
+              <div class="col-md-6">
+              <div class="card">
+                  <div class="card-body pb-4">
+                       <div class="table-responsive"  style='width:500px;height:420px;'>
+                            <table class="table table-striped table-sm">
+                                <thead>
+                                    <tr>
+                                        <th style="text-align:center;vertical-align: middle" scope="col">#</th>
+                                        <th style="text-align:center;vertical-align: middle" scope="col">处理结果</th>
+                                        <th style="text-align:center;vertical-align: middle" scope="col">DICE系数</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td style="text-align:center;vertical-align: middle">图1</td>
+                                        <td style="text-align:center;vertical-align: middle" scope="col"><img height="80px" src={{url_for('static',filename='csv/chest_unet/'+data1[0])}}></td>
+                                        <td style="text-align:center;vertical-align: middle" scope="col">{{data2[0]}}</td>
+                                    </tr>
+                                     <tr>
+                                        <td style="text-align:center;vertical-align: middle">图2</td>
+                                        <td style="text-align:center;vertical-align: middle" scope="col"><img height="80px" src={{url_for('static',filename='csv/chest_unet/'+data1[1])}}></td>
+                                        <td style="text-align:center;vertical-align: middle" scope="col">{{data2[1]}}</td>
+                                    </tr>
+                                     <tr>
+                                        <td style="text-align:center;vertical-align: middle">图3</td>
+                                        <td style="text-align:center;vertical-align: middle" scope="col"><img height="80px" src={{url_for('static',filename='csv/chest_unet/'+data1[2])}}></td>
+                                        <td style="text-align:center;vertical-align: middle" scope="col">{{data2[2]}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align:center;vertical-align: middle">图4</td>
+                                        <td style="text-align:center;vertical-align: middle" scope="col"><img height="80px" src={{url_for('static',filename='csv/chest_unet/'+data1[3])}}></td>
+                                        <td style="text-align:center;vertical-align: middle" scope="col">{{data2[3]}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align:center;vertical-align: middle">图5</td>
+                                        <td style="text-align:center;vertical-align: middle" scope="col"><img height="80px" src={{url_for('static',filename='csv/chest_unet/'+data1[4])}}></td>
+                                        <td style="text-align:center;vertical-align: middle" scope="col">{{data2[4]}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align:center;vertical-align: middle">图6</td>
+                                        <td style="text-align:center;vertical-align: middle" scope="col"><img height="80px" src={{url_for('static',filename='csv/chest_unet/'+data1[5])}}></td>
+                                        <td style="text-align:center;vertical-align: middle" scope="col">{{data2[5]}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align:center;vertical-align: middle">图7</td>
+                                        <td style="text-align:center;vertical-align: middle" scope="col"><img height="80px" src={{url_for('static',filename='csv/chest_unet/'+data1[6])}}></td>
+                                        <td style="text-align:center;vertical-align: middle" scope="col">{{data2[6]}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align:center;vertical-align: middle">图8</td>
+                                        <td style="text-align:center;vertical-align: middle" scope="col"><img height="80px" src={{url_for('static',filename='csv/chest_unet/'+data1[7])}}></td>
+                                        <td style="text-align:center;vertical-align: middle" scope="col">{{data2[7]}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align:center;vertical-align: middle">图9</td>
+                                        <td style="text-align:center;vertical-align: middle" scope="col"><img height="80px" src={{url_for('static',filename='csv/chest_unet/'+data1[8])}}></td>
+                                        <td style="text-align:center;vertical-align: middle" scope="col">{{data2[8]}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                       </div>
+                  </div>
+              </div>
+              </div>
+              <h5 class="h6 mb-0 text-muted" style="text-align:center">每张图像随机切割为500张并迭代10次后的网络模型进行预测的结果</h5>
+            </div>
+        </div>
+        <!-- drive -->
+        <div id="div_DRIVE" style="padding-top:4px">
+            <hr class="featurette-divider mb-4">
+            <div class="row featurette">
+              <div class="col-md-7">
+                <h2>DRIVE <span class="text-muted">用于血管提取的视网膜图像数据集</span></h2>
+                <p class="lead">DRIVE数据库的建立是为了对视网膜图像中的血管分割进行比较研究。</p>
+                <p class="lead">DRIVE数据库的特殊之处是提供了mask数据集，使开发人员能够轻松地仅对mask内的有效图像进行处理。</p>
+              </div>
+              <div class="col-md-5">
+                 <img src={{url_for('static',filename='assets/img/pics/drive1.png')}} width="445px"/>
+                  <p  class="h6 mb-0" style="padding:20px 130px"> DRIVE数据集提供的数据 </p>
+              </div>
+              <div class="col-md-6">
+              <div class="card">
+                  <div class="card-body pb-4">
+                      <div id="container2" style='width:500px;height:420px;'></div>
+                  </div>
+              </div>
+              </div>
+              <div class="col-md-6">
+              <div class="card">
+                  <div class="card-body pb-4">
+                       <div class="table-responsive"  style='width:500px;height:420px;'>
+                            <table class="table table-striped table-sm">
+                                <thead>
+                                    <tr>
+                                        <th style="text-align:center;vertical-align: middle" scope="col">#</th>
+                                        <th style="text-align:center;vertical-align: middle" scope="col">处理结果</th>
+                                        <th style="text-align:center;vertical-align: middle" scope="col">DICE系数</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td style="text-align:center;vertical-align: middle">图1</td>
+                                        <td style="text-align:center;vertical-align: middle" scope="col"><img height="80px" src={{url_for('static',filename='csv/eye_unet/'+data3[0])}}></td>
+                                        <td style="text-align:center;vertical-align: middle" scope="col">{{data4[0]}}</td>
+                                    </tr>
+                                     <tr>
+                                        <td style="text-align:center;vertical-align: middle">图2</td>
+                                        <td style="text-align:center;vertical-align: middle" scope="col"><img height="80px" src={{url_for('static',filename='csv/eye_unet/'+data3[1])}}></td>
+                                        <td style="text-align:center;vertical-align: middle" scope="col">{{data4[1]}}</td>
+                                    </tr>
+                                     <tr>
+                                        <td style="text-align:center;vertical-align: middle">图3</td>
+                                        <td style="text-align:center;vertical-align: middle" scope="col"><img height="80px" src={{url_for('static',filename='csv/eye_unet/'+data3[2])}}></td>
+                                        <td style="text-align:center;vertical-align: middle" scope="col">{{data4[2]}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align:center;vertical-align: middle">图4</td>
+                                        <td style="text-align:center;vertical-align: middle" scope="col"><img height="80px" src={{url_for('static',filename='csv/eye_unet/'+data3[3])}}></td>
+                                        <td style="text-align:center;vertical-align: middle" scope="col">{{data4[3]}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align:center;vertical-align: middle">图5</td>
+                                        <td style="text-align:center;vertical-align: middle" scope="col"><img height="80px" src={{url_for('static',filename='csv/eye_unet/'+data3[4])}}></td>
+                                        <td style="text-align:center;vertical-align: middle" scope="col">{{data4[4]}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align:center;vertical-align: middle">图6</td>
+                                        <td style="text-align:center;vertical-align: middle" scope="col"><img height="80px" src={{url_for('static',filename='csv/eye_unet/'+data3[5])}}></td>
+                                        <td style="text-align:center;vertical-align: middle" scope="col">{{data4[5]}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align:center;vertical-align: middle">图7</td>
+                                        <td style="text-align:center;vertical-align: middle" scope="col"><img height="80px" src={{url_for('static',filename='csv/eye_unet/'+data3[6])}}></td>
+                                        <td style="text-align:center;vertical-align: middle" scope="col">{{data4[6]}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align:center;vertical-align: middle">图8</td>
+                                        <td style="text-align:center;vertical-align: middle" scope="col"><img height="80px" src={{url_for('static',filename='csv/eye_unet/'+data3[7])}}></td>
+                                        <td style="text-align:center;vertical-align: middle" scope="col">{{data4[7]}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align:center;vertical-align: middle">图9</td>
+                                        <td style="text-align:center;vertical-align: middle" scope="col"><img height="80px" src={{url_for('static',filename='csv/eye_unet/'+data3[8])}}></td>
+                                        <td style="text-align:center;vertical-align: middle" scope="col">{{data4[8]}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                       </div>
+                  </div>
+              </div>
+              </div>
+              <h5 class="h6 mb-0 text-muted" style="text-align:center">每张图像随机切割为1000张并迭代12次后的网络模型进行预测的结果</h5>
+            </div>
+        </div>
+        <!-- hippocampus -->
+        <div id="div_hippocampus" style="padding-top:4px">
+            <hr class="featurette-divider">
+            <div class="row featurette">
+              <div class="col-md-7">
+                <h2>hippocampus<span class="text-muted">海马体图像数据集</span></h2>
+                <p class="lead">hippocampus挑战赛给出的数据集是nii.gz格式的3维图片，需要用代码切割</p>
+                <img src={{url_for('static',filename='assets/img/pics/hippo2.png')}}/>
+                <p class="lead">hippocampus数据库的特殊之处是为开发者提供了完整的三维图像，开发者可以自行选择切割角度和数量进行训练。</p>
+                <p class="lead">将每张图片转换为40*50大小的图片，并将其切割为下图碎片后交给unet进行训练</p>
+                <img src={{url_for('static',filename='assets/img/pics/hippo3.png')}}/>
+                <img src={{url_for('static',filename='assets/img/pics/hippo4.png')}}/>
+              </div>
+              <div class="col-md-5">
+                 <img src={{url_for('static',filename='assets/img/pics/hippo1.png')}} width="445px"/>
+                  <p class="h6 mb-0" style="padding:30px 100px"> 某一张三维图像代码切割后的切片 </p>
+              </div>
+              <div class="col-md-6">
+              <div class="card">
+                  <div class="card-body pb-4">
+                      <div id="container3" style='width:500px;height:420px;'></div>
+                  </div>
+              </div>
+              </div>
+              <div class="col-md-6">
+              <div class="card">
+                  <div class="card-body pb-4">
+                       <div class="table-responsive"  style='width:500px;height:420px;'>
+                            <table class="table table-striped table-sm">
+                                 <thead>
+                                    <tr>
+                                        <th style="text-align:center;vertical-align: middle" scope="col">#</th>
+                                        <th style="text-align:center;vertical-align: middle" scope="col">处理结果</th>
+                                        <th style="text-align:center;vertical-align: middle" scope="col">DICE系数</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td style="text-align:center;vertical-align: middle">图1</td>
+                                        <td style="text-align:center;vertical-align: middle" scope="col"><img height="80px" src={{url_for('static',filename='csv/hippocampus_unet/'+data5[0])}}></td>
+                                        <td style="text-align:center;vertical-align: middle" scope="col">{{data6[0]}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align:center;vertical-align: middle">图2</td>
+                                        <td style="text-align:center;vertical-align: middle" scope="col"><img height="80px" src={{url_for('static',filename='csv/hippocampus_unet/'+data5[1])}}></td>
+                                        <td style="text-align:center;vertical-align: middle" scope="col">{{data6[1]}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align:center;vertical-align: middle">图3</td>
+                                        <td style="text-align:center;vertical-align: middle" scope="col"><img height="80px" src={{url_for('static',filename='csv/hippocampus_unet/'+data5[2])}}></td>
+                                        <td style="text-align:center;vertical-align: middle" scope="col">{{data6[2]}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align:center;vertical-align: middle">图4</td>
+                                        <td style="text-align:center;vertical-align: middle" scope="col"><img height="80px" src={{url_for('static',filename='csv/hippocampus_unet/'+data5[3])}}></td>
+                                        <td style="text-align:center;vertical-align: middle" scope="col">{{data6[3]}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align:center;vertical-align: middle">图5</td>
+                                        <td style="text-align:center;vertical-align: middle" scope="col"><img height="80px" src={{url_for('static',filename='csv/hippocampus_unet/'+data5[4])}}></td>
+                                        <td style="text-align:center;vertical-align: middle" scope="col">{{data6[4]}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align:center;vertical-align: middle">图6</td>
+                                        <td style="text-align:center;vertical-align: middle" scope="col"><img height="80px" src={{url_for('static',filename='csv/hippocampus_unet/'+data5[5])}}></td>
+                                        <td style="text-align:center;vertical-align: middle" scope="col">{{data6[5]}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align:center;vertical-align: middle">图7</td>
+                                        <td style="text-align:center;vertical-align: middle" scope="col"><img height="80px" src={{url_for('static',filename='csv/hippocampus_unet/'+data5[6])}}></td>
+                                        <td style="text-align:center;vertical-align: middle" scope="col">{{data6[6]}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align:center;vertical-align: middle">图8</td>
+                                        <td style="text-align:center;vertical-align: middle" scope="col"><img height="80px" src={{url_for('static',filename='csv/hippocampus_unet/'+data5[7])}}></td>
+                                        <td style="text-align:center;vertical-align: middle" scope="col">{{data6[7]}}</td>
+                                    </tr>
+                                    <tr>
+                                        <td style="text-align:center;vertical-align: middle">图9</td>
+                                        <td style="text-align:center;vertical-align: middle" scope="col"><img height="80px" src={{url_for('static',filename='csv/hippocampus_unet/'+data5[8])}}></td>
+                                        <td style="text-align:center;vertical-align: middle" scope="col">{{data6[8]}}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                       </div>
+                  </div>
+              </div>
+              </div>
+              <h5 class="h6 mb-0 text-muted" style="text-align:center">每张图像随机切割为400张并迭代15次后的网络模型进行预测的结果</h5>
+            </div>
+        </div>
+    </div>
+
+    <footer class="position-relative" id="footer-main">
+        <div class="footer pt-lg-1">
+            <!-- Footer -->
+            <div class="container pt-1">
+                <div class="row align-items-center justify-content-md-between pb-1">
+                    <div class="col-md-3">
+                        <div class="copyright text-sm font-weight-bold text-center text-md-left">
+                            &copy; 2023 <a href="www.github.com" class="font-weight-bold" target="_blank">PrismIf</a>. All rights reserved
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+     <!-- Core JS  -->
+    <script src="{{url_for('static', filename='assets/libs/jquery/dist/jquery.min.js')}}"></script>
+    <script src="{{url_for('static', filename='assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js')}}"></script>
+    <script src="{{url_for('static', filename='assets/libs/svg-injector/dist/svg-injector.min.js')}}"></script>
+    <!-- Quick JS -->
+    <script src="{{url_for('static', filename='assets/js/quick-website.js')}}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons@4.28.0/dist/feather.min.js" integrity="sha384-uO3SXW5IuS1ZpFPKugNNWqTZRRglnUJK6UAZ/gxOX80nxEkN9NcGZTftn6RzhGWE" crossorigin="anonymous"></script><script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js" integrity="sha384-zNy6FEbO50N+Cg5wap8IKA4M/ZnLJgzc6w2NqACZaK0u0FXfOWRRJOnQtpZun8ha" crossorigin="anonymous"></script>
+    <!-- Echarts JS -->
+    <script type="text/javascript" src="https://fastly.jsdelivr.net/npm/echarts@5.4.1/dist/echarts.min.js"></script>
+
+    <script type="text/javascript">
+    $.ajax({
+            success:function(data){
+            var dom = document.getElementById('container1');
+            var myChart = echarts.init(dom, null, {
+              renderer: 'canvas',
+              useDirtyRect: false
+            });
+            var app = {};
+            var option;
+            option = {
+          legend: {
+            top: 'bottom'
+          },
+          toolbox: {
+            show: true,
+            feature: {
+              mark: { show: true },
+              dataView: { show: true, readOnly: false },
+              restore: { show: true },
+              saveAsImage: { show: true }
+            }
+          },
+          series: [
+            {
+              name: 'Nightingale Chart',
+              type: 'pie',
+              radius: [30, 130],
+              center: ['50%', '50%'],
+              roseType: 'area',
+              itemStyle: {
+                borderRadius: 8
+              },
+              data:[
+                { value: {{data2[0]}}, name: '{{data1[0]}}' },
+                { value: {{data2[1]}}, name: '{{data1[1]}}' },
+                { value: {{data2[2]}}, name: '{{data1[2]}}' },
+                { value: {{data2[3]}}, name: '{{data1[3]}}' },
+                { value: {{data2[4]}}, name: '{{data1[4]}}' },
+                { value: {{data2[5]}}, name: '{{data1[5]}}' },
+                { value: {{data2[6]}}, name: '{{data1[6]}}' },
+                { value: {{data2[7]}}, name: '{{data1[7]}}' },
+                { value: {{data2[8]}}, name: '{{data1[8]}}' }
+              ]
+            }
+          ]
+        };
+
+            if (option && typeof option === 'object') {
+              myChart.setOption(option);
+            }
+            window.addEventListener('resize', myChart.resize);
+            }
+    });
+  </script>
+    <script type="text/javascript">
+    $.ajax({
+            success:function(data){
+            var dom = document.getElementById('container2');
+            var myChart = echarts.init(dom, null, {
+              renderer: 'canvas',
+              useDirtyRect: false
+            });
+            var app = {};
+            var option;
+            option = {
+          legend: {
+            top: 'bottom'
+          },
+          toolbox: {
+            show: true,
+            feature: {
+              mark: { show: true },
+              dataView: { show: true, readOnly: false },
+              restore: { show: true },
+              saveAsImage: { show: true }
+            }
+          },
+          series: [
+            {
+              name: 'Nightingale Chart',
+              type: 'pie',
+              radius: [30, 130],
+              center: ['50%', '50%'],
+              roseType: 'area',
+              itemStyle: {
+                borderRadius: 8
+              },
+              data:[
+                { value: {{data4[0]}}, name: '{{data3[0]}}' },
+                { value: {{data4[1]}}, name: '{{data3[1]}}' },
+                { value: {{data4[2]}}, name: '{{data3[2]}}' },
+                { value: {{data4[3]}}, name: '{{data3[3]}}' },
+                { value: {{data4[4]}}, name: '{{data3[4]}}' },
+                { value: {{data4[5]}}, name: '{{data3[5]}}' },
+                { value: {{data4[6]}}, name: '{{data3[6]}}' },
+                { value: {{data4[7]}}, name: '{{data3[7]}}' },
+                { value: {{data4[8]}}, name: '{{data3[8]}}' }
+              ]
+            }
+          ]
+        };
+
+            if (option && typeof option === 'object') {
+              myChart.setOption(option);
+            }
+            window.addEventListener('resize', myChart.resize);
+            }
+    });
+  </script>
+
+    <script type="text/javascript">
+    $.ajax({
+            success:function(data){
+            var dom = document.getElementById('container3');
+            var myChart = echarts.init(dom, null, {
+              renderer: 'canvas',
+              useDirtyRect: false
+            });
+            var app = {};
+            var option;
+            option = {
+          legend: {
+            top: 'bottom'
+          },
+          toolbox: {
+            show: true,
+            feature: {
+              mark: { show: true },
+              dataView: { show: true, readOnly: false },
+              restore: { show: true },
+              saveAsImage: { show: true }
+            }
+          },
+          series: [
+            {
+              name: 'Nightingale Chart',
+              type: 'pie',
+              radius: [30, 130],
+              center: ['50%', '50%'],
+              roseType: 'area',
+              itemStyle: {
+                borderRadius: 8
+              },
+              data:[
+                { value: {{data6[0]}}, name: '{{data5[0]}}' },
+                { value: {{data6[1]}}, name: '{{data5[1]}}' },
+                { value: {{data6[2]}}, name: '{{data5[2]}}' },
+                { value: {{data6[3]}}, name: '{{data5[3]}}' },
+                { value: {{data6[4]}}, name: '{{data5[4]}}' },
+                { value: {{data6[5]}}, name: '{{data5[5]}}' },
+                { value: {{data6[6]}}, name: '{{data5[6]}}' },
+                { value: {{data6[7]}}, name: '{{data5[7]}}' },
+                { value: {{data6[8]}}, name: '{{data5[8]}}' }
+              ]
+            }
+          ]
+        };
+
+            if (option && typeof option === 'object') {
+              myChart.setOption(option);
+            }
+            window.addEventListener('resize', myChart.resize);
+            }
+    });
+  </script>
+
+  </body>
+</html>
