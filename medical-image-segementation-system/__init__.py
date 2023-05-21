@@ -16,7 +16,6 @@ from skimage.feature import canny
 from strUtil import pic_str
 
 from fcm import get_centroids, get_label, get_init_fuzzy_mat, fcm
-from lv_set import find_lsf
 from lv_set.find_lsf import find_lsf
 from lv_set.drlse import get_params
 
@@ -681,4 +680,4 @@ def data_hippocampus_unet():
 
 
 if __name__ == '__main__':
-    app.run(debug=True, port=1128)
+    app.run(port=1128)
