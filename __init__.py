@@ -701,4 +701,4 @@ def data_hippocampus_unet():
 
 
 if __name__ == '__main__':
-    app.run(debug=True,port=1128)
+    app.run(port=1128)
