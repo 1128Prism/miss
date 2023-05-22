@@ -241,11 +241,10 @@
       <div class="container marketing">
         <div id="div_edge" style="padding-top:2px">
             <hr class="featurette-divider">
-
             <div class="row featurette">
               <div class="col-md-7">
-                <h2 class="featurette-heading fw-normal lh-1">基于边界的 <span class="text-muted">医学图像分割算法</span></h2>
-                <p class="lead">将图像划分为子图,获得二维图像时,不可避免会存在边界,边界像素表现为灰度幅值的不连续。
+                <h2 class="fw-normal lh-1">基于边界的 <span class="text-muted">医学图像分割算法</span></h2>
+                <p class="lead mr-5 mt-5">将图像划分为子图,获得二维图像时,不可避免会存在边界,边界像素表现为灰度幅值的不连续。
                     而显现边界的关键是边界两侧像素特征存在明显的差异,因此可以通过边界进行子图像划分,实现图像的分割。</p>
               </div>
               <div class="col-md-5">
@@ -257,27 +256,25 @@
 
         <div id="div_threshold" style="padding-top:2px">
             <hr class="featurette-divider">
-
             <div class="row featurette">
               <div class="col-md-7 order-md-2">
-                <h2 class="featurette-heading fw-normal lh-1">基于阈值的 <span class="text-muted">医学图像分割算法</span></h2>
-                <p class="lead">阈值是一种经典的基于区域的并行分割技术,其将图像像素点分为若干类,在肿瘤性疾病诊断中具有较高的应用价值。
+                <h2 class="fw-normal lh-1 ml-5">基于阈值的 <span class="text-muted">医学图像分割算法</span></h2>
+                <p class="lead ml-5 mt-5">阈值是一种经典的基于区域的并行分割技术,其将图像像素点分为若干类,在肿瘤性疾病诊断中具有较高的应用价值。
                     按照分割区域方式又可分为局部阈值分割,或称为自适应性阈值法。阈值分割利用图像灰度直方图信息,计算量小,利于实现,但是易导致错误分割,同时未考虑空间信息,易受噪音等原因产生伪影,其主要作为一种预处理方法。</p>
               </div>
               <div class="col-md-5 order-md-1">
                   <img src={{url_for('static',filename='assets/img/pics/threshold.jpg')}} width="445px" style="margin-top:50px"/>
-                  <p style="padding:50px 150px 0"> 不同边缘分割算子 </p>
+                  <p style="padding:50px 150px 0"> 设置阈值进行分割 </p>
               </div>
             </div>
         </div>
 
         <div id="div_area" style="padding-top:2px">
             <hr class="featurette-divider">
-
             <div class="row featurette">
               <div class="col-md-7">
-                <h2 class="featurette-heading fw-normal lh-1">基于区域增长的 <span class="text-muted">医学图像分割算法</span></h2>
-                <p class="lead">区域生长和分裂合并方法,是一种典型的串行区域分割方法,其根据用户的预定义相似性函数,将图像像素或者子区域聚合成为更大的区域。
+                <h2 class="fw-normal lh-1">基于区域增长的 <span class="text-muted">医学图像分割算法</span></h2>
+                <p class="lead mr-5 mt-5">区域生长和分裂合并方法,是一种典型的串行区域分割方法,其根据用户的预定义相似性函数,将图像像素或者子区域聚合成为更大的区域。
                     在实际应用中,区域增长法需要确定区域数目,选择具有代表性的种子点,选择有意义的特征,选择停止的准则,计算方法简单,区域算法的精髓是将图像分类为多个相似的小区域,按照邻接参考某种标准合并,
                     对于连续的均匀的目标,如血管﹑实质性组织,具有较好的准确性、高效性。该法对噪音较敏感,更适合分割肿瘤、伤疤这些较小的结构。</p>
               </div>
@@ -290,17 +287,16 @@
 
         <div id="div_statics" style="padding-top:2px">
         <hr class="featurette-divider">
-
         <div class="row featurette">
           <div class="col-md-7 order-md-2">
-            <h2 class="featurette-heading fw-normal lh-1">基于统计学的 <span class="text-muted">医学图像分割算法</span></h2>
-           <p class="lead">从统计学的角度进行图像分割是指将图像的各个像素点特征值作为一种概率分布的随机变量,
+            <h2 class="fw-normal lh-1 ml-5">基于统计学的 <span class="text-muted">医学图像分割算法</span></h2>
+           <p class="lead ml-5 mt-5">从统计学的角度进行图像分割是指将图像的各个像素点特征值作为一种概率分布的随机变量,
                 从概率的角度来看,找出最应该得到图像的某种组合,又可分为分类器、聚类、随机场、混合分布等。
                 以最常用的聚类分析为例,其余分类器算法类似,但无需训练样本，是一种无监督的算法,通过迭代进行图像分类,提取每一类的特征值,按照算法又可分为K均值﹑模糊C均值、期待最大化算法等。</p>
           </div>
           <div class="col-md-5 order-md-1">
               <img src={{url_for('static',filename='assets/img/pics/mrf.png')}} width="445px"/>
-              <p style="padding:50px 150px 0"> Markov随机场示例  </p>
+              <p style="padding:50px 150px"> Markov随机场示例  </p>
           </div>
         </div>
         </div>
@@ -309,8 +305,8 @@
             <hr class="featurette-divider">
             <div class="row featurette">
               <div class="col-md-7">
-                <h2 class="featurette-heading fw-normal lh-1">基于图论的 <span class="text-muted">医学图像分割算法</span></h2>
-                <p class="lead">基于图论的图像分割是一种新的分割技术,无需初始化,其可将图像分割转换为图的最优划分回题,
+                <h2 class="fw-normal lh-1">基于图论的 <span class="text-muted">医学图像分割算法</span></h2>
+                <p class="lead mr-5 mt-5">基于图论的图像分割是一种新的分割技术,无需初始化,其可将图像分割转换为图的最优划分回题,
                 利用剪切标准得到最佳的分割策略,是一种全局准则,图像分割的过程中是得到全局最优解的过程。</p>
               </div>
               <div class="col-md-5">
@@ -324,8 +320,8 @@
             <hr class="featurette-divider">
             <div class="row featurette">
                 <div class="col-md-7 order-md-2">
-                    <h2 class="featurette-heading fw-normal lh-1">基于活动轮廓模型的 <span class="text-muted">医学图像分割算法</span></h2>
-                    <p class="lead">活动轮廓模型是由Kass 等首先提出一种图像分割技术，Gaselles等进一步发展了该技术﹐近年来开始用于视觉追踪等其他领域。
+                    <h2 class="fw-normal lh-1 ml-5">基于活动轮廓模型的 <span class="text-muted">医学图像分割算法</span></h2>
+                    <p class="lead ml-5 mt-5">活动轮廓模型是由Kass 等首先提出一种图像分割技术，Gaselles等进一步发展了该技术﹐近年来开始用于视觉追踪等其他领域。
                     基于边缘的活动轮廓莫悉尼港采用边缘停止函数,可分割边缘化较明显的图像﹐对噪声较敏感,其主要优势在于无需设置图像的全局约束项,对于某些分割目标和背景不均匀的图像分割效果较好。 </p>
                 </div>
                 <div class="col-md-5 order-md-1">
@@ -337,28 +333,26 @@
 
         <div id="div_info" style="padding-top:4px">
             <hr class="featurette-divider">
-
             <div class="row featurette">
               <div class="col-md-7">
-                <h2 class="featurette-heading fw-normal lh-1">基于信息论的 <span class="text-muted">医学图像分割算法</span></h2>
-                <p class="lead">信息论是旨在采用概率论﹑数数理统计方法并,将信息的传递视为一种概率事件,熵是信息论最基本的度量单位,
+                <h2 class="fw-normal lh-1 mr-5">基于信息论的 <span class="text-muted">医学图像分割算法</span></h2>
+                <p class="lead mr-5 mt-5">信息论是旨在采用概率论﹑数数理统计方法并,将信息的传递视为一种概率事件,熵是信息论最基本的度量单位,
                     医学图像分割便采用信息论中的嫡理论进行。极值可获得最合适的分割阈值。目前最常用的方法为极小极大熵值公式分割算法,
                     其将图像灰度直方图划分为多个相互独立的类,使各类熵总量最大,其具有全局客观属性,但收敛速度慢,计算量大,对噪声较大、结构复杂的图像分割效果不理想。<p>
               </div>
               <div class="col-md-5">
                   <img src={{url_for('static',filename='assets/img/pics/statics.png')}} width="445px"/>
-                  <p style="padding:50px 150px 0"> 布谷鸟搜索算法求最大熵 </p>
+                  <p style="padding:50px 130px"> 布谷鸟搜索算法求最大熵 </p>
               </div>
             </div>
         </div>
 
         <div id="div_fuzzy" style="padding-top:4px">
             <hr class="featurette-divider">
-
             <div class="row featurette">
               <div class="col-md-7 order-md-2">
-                <h2 class="featurette-heading fw-normal lh-1">基于模糊集理论的 <span class="text-muted">医学图像分割算法</span></h2>
-               <p class="lead">指采用不准确的经验知识定义一个事件。模糊理论主要被用于模式识别领域,用于表示信息不完备﹑不确定﹑病态表示的不确定性,
+                <h2 class="fw-normal lh-1 ml-5">基于模糊集理论的 <span class="text-muted">医学图像分割算法</span></h2>
+               <p class="lead ml-5 mt-5">指采用不准确的经验知识定义一个事件。模糊理论主要被用于模式识别领域,用于表示信息不完备﹑不确定﹑病态表示的不确定性,
                     用于图像分割技术又可分为模糊阈值分割、模糊聚类分割﹑模糊连接度分割等。</p>
               </div>
               <div class="col-md-5 order-md-1">
@@ -373,8 +367,8 @@
             <hr class="featurette-divider">
             <div class="row featurette">
               <div class="col-md-7">
-                <h2 class="featurette-heading fw-normal lh-1">基于神经网络的 <span class="text-muted">医学图像分割算法</span></h2>
-                <p class="lead">
+                <h2 class="fw-normal lh-1 mr-5">基于神经网络的 <span class="text-muted">医学图像分割算法</span></h2>
+                <p class="lead mr-5 mt-5">
                     神经网络实质是一个分类以及标记图像的过程中,按照拓扑结构又可分为前向神经网络﹑反馈网络、自组织神经网络。
                     神经网络图像分割将分割问题转化为能量函数、分类等问题,通过训练,可修正节点之间的连接关系以及权值,进而更好的对新的图像进行分割。</p>
               </div>
