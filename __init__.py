@@ -23,8 +23,9 @@ from lv_set.drlse import get_params
 
 # 配置Flask路由，使得前端可以访问服务器中的静态资源
 app = Flask(__name__, static_folder='static', static_url_path='/static')
+CORS(app)
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'JPG', 'PNG', 'gif', 'GIF'}
-CORS(app, resources=r'/*')
+
 
 global src_img, pic_path, res_pic_path, message_get, pic_name, final
 
