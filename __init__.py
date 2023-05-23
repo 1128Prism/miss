@@ -12,7 +12,7 @@ from flask_cors import *
 import cv2 as cv
 
 from matplotlib import pyplot as plt
-from skimage import measure
+from skimage import measure, filters, img_as_ubyte
 from skimage.feature import canny
 
 from strUtil import pic_str
@@ -21,10 +21,12 @@ from fcm import get_centroids, get_label, get_init_fuzzy_mat, fcm
 from lv_set.find_lsf import find_lsf
 from lv_set.drlse import get_params
 
+from preprocess import gamma_trans,clahe_trans
+
 # 配置Flask路由，使得前端可以访问服务器中的静态资源
 app = Flask(__name__, static_folder='static', static_url_path='/static')
 CORS(app)
-ALLOWED_EXTENSIONS = {'png', 'jpg', 'JPG', 'PNG', 'gif', 'GIF'}
+ALLOWED_EXTENSIONS = {'png', 'jpg', 'JPG', 'PNG', 'gif', 'tif'}
 
 
 global src_img, pic_path, res_pic_path, message_get, pic_name, final
@@ -85,6 +87,8 @@ def upload_pic():
     global src_img
     src_img = cv.imread('static/' + pic_path)
     src_img = cv.cvtColor(src_img, cv.COLOR_BGR2GRAY)
+    src_img = clahe_trans(src_img)
+    src_img = gamma_trans(src_img)
 
     return render_template('live/liveExperience.html', pic_path=pic_path, res_pic_path=res_pic_path)
 
@@ -102,11 +106,13 @@ def algorithm_process():
     print(message_get)
     if message_get == 'SOBEL':
         # 边缘检测之Sobel 算子
-        edge_img = canny(src_img, sigma=2)
-        from scipy import ndimage as ndi
-        sobel_img = ndi.binary_fill_holes(edge_img)
-        fig, axes = plt.subplots(figsize=(10, 6))
-        axes.imshow(sobel_img, cmap=pylab.cm.gray, interpolation='nearest')
+        edges = filters.sobel(src_img)
+        # 浮点型转成uint8型
+        edges = img_as_ubyte(edges)
+        plt.figure()
+        plt.imshow(edges, plt.cm.gray)
+        plt.xticks([])
+        plt.yticks([])
         pic_name = 'sobel.png'
         res_pic_path = 'tempPics/' + pic_name
         plt.savefig('static/' + res_pic_path)
@@ -459,7 +465,6 @@ def line_stack_data_chest():
         data4 = next(reader)
         data5 = next(reader)
         data6 = next(reader)
-
     data_list['data1'] = data1
     data_list['data2'] = data2
     data_list['data3'] = data3
@@ -576,7 +581,6 @@ def data_eye():
         data5 = next(reader)
         data6 = next(reader)
         data7 = next(reader)
-
     data_list['data1'] = data1
     data_list['data2'] = data2
     data_list['data3'] = data3
