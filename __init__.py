@@ -3,7 +3,6 @@ import json
 import os
 
 import numpy as np
-import pylab
 from PIL import Image
 from flask import Flask, render_template, send_from_directory, request, Response
 
@@ -13,7 +12,6 @@ import cv2 as cv
 
 from matplotlib import pyplot as plt
 from skimage import measure, filters, img_as_ubyte
-from skimage.feature import canny
 
 from strUtil import pic_str
 
@@ -701,4 +699,4 @@ def data_hippocampus_unet():
 
 
 if __name__ == '__main__':
-    app.run(port=1128)
+    app.run(debug=True,port=1128)
