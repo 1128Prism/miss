@@ -1,7 +1,7 @@
 const algorithm = document.getElementById('algorithm-one');
 const choice = document.getElementById('choice');
 
-function printAlgorithm() {
+function chooseAlgorithm() {
     $.ajax({
          type: "GET",
          url: "/liveExperience/upload_success",
@@ -10,4 +10,4 @@ function printAlgorithm() {
     });
 }
 
-choice.addEventListener('click', printAlgorithm);
+choice.addEventListener('click', chooseAlgorithm);

@@ -102,8 +102,6 @@ def get_Algorithm():
 @app.route('/liveExperience/upload_success/result')
 def algorithm_process():
     global src_img, res_pic_path, pic_path, message_get, pic_name
-
-    print(message_get)
     if message_get == 'SOBEL':
         # 边缘检测之Sobel 算子
         edges = filters.sobel(src_img)
@@ -118,7 +116,7 @@ def algorithm_process():
         plt.savefig('static/' + res_pic_path)
 
     elif message_get == 'OTSU':
-        otsu_ret, otsu_img = cv.threshold(src_img, 0, 255, cv.THRESH_OTSU)
+        _, otsu_img = cv.threshold(src_img, 0, 255, cv.THRESH_OTSU)
         pic_name = 'eye_otsu.png'
         res_pic_path = 'tempPics/' + pic_name
         cv.imwrite('static/' + res_pic_path, otsu_img)
@@ -211,8 +209,6 @@ def algorithm_process():
         fig.savefig('static/' + res_pic_path, bbox_inches='tight')
 
         del params
-
-    # elif message_get == 'UNET':
 
     return render_template('live/show.html', pic_path=pic_path, res_pic_path=res_pic_path, temp=message_get)
 
