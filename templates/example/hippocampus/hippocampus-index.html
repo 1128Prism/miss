@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="author" content="PrismIf">
 
-    <title>DRIVE眼底血管数据集示例</title>
+    <title>海马体图像数据集示例</title>
 
     <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/dashboard/">
     <link href={{url_for('static',filename='assets/libs/bootstrap/dist/css/bootstrap.min.css')}} rel="stylesheet">
@@ -227,7 +227,7 @@
                 <tr>
                   <th style="text-align:center;vertical-align: middle"  scope="col">#</th>
                   <th style="text-align:center;vertical-align: middle"  scope="col">OTSU 基于阈值</th>
-                  <th style="text-align:center;vertical-align: middle"  scope="col">FCM 基于模糊集和聚类</th>
+                  <th style="text-align:center;vertical-align: middle"  scope="col">FCM 基于模糊聚类</th>
                   <th style="text-align:center;vertical-align: middle"  scope="col">DRLSE 基于可活动轮廓</th>
                   <th style="text-align:center;vertical-align: middle"  scope="col">UNET 基于深度学习</th>
                 </tr>
@@ -393,7 +393,7 @@
                 };
                 option = {
                   legend: {
-                    data: data['data1'],
+                    data: data['header'],
                     left: '10%'
                   },
 

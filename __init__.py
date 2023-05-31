@@ -79,24 +79,28 @@ def upload_pic():
 
     # 保存图片
     global pic_path, res_pic_path
+    # 为临时图片生成随机id
     pic_path = 'tempPics/' + pic_str().create_uuid() + '.png'
     img.save('static/' + pic_path)
-    res_pic_path = 'assets/img/svg/illustrations/illustration-7.svg'
     global src_img
     src_img = cv.imread('static/' + pic_path)
     src_img = cv.cvtColor(src_img, cv.COLOR_BGR2GRAY)
+    # 预处理
     src_img = clahe_trans(src_img)
     src_img = gamma_trans(src_img)
 
+    res_pic_path = 'assets/img/svg/illustrations/illustration-7.svg'
     return render_template('live/liveExperience.html', pic_path=pic_path, res_pic_path=res_pic_path)
 
 
+# 获取算法信息
 @app.route('/liveExperience/upload_success', methods=['GET'])
 def get_Algorithm():
     global message_get
     message_get = str(request.values.get("algorithm"))
 
 
+# 使用对应算法进行处理
 @app.route('/liveExperience/upload_success/result')
 def algorithm_process():
     global src_img, res_pic_path, pic_path, message_get, pic_name
@@ -265,9 +269,9 @@ def show_example_chest():
         data3 = next(reader)
         data4 = next(reader)
         data5 = next(reader)
+        data6 = next(reader)
     return render_template('example/chest/chest-index.html', header=header, data1=data1, data2=data2, data3=data3,
-                           data4=data4,
-                           data5=data5)
+                           data4=data4, data5=data5, data6=data6)
 
 
 @app.route('/example/chest/otsu')
@@ -459,12 +463,14 @@ def line_stack_data_chest():
         data4 = next(reader)
         data5 = next(reader)
         data6 = next(reader)
+        data7 = next(reader)
     data_list['data1'] = data1
     data_list['data2'] = data2
     data_list['data3'] = data3
     data_list['data4'] = data4
     data_list['data5'] = data5
     data_list['data6'] = data6
+    data_list['data7'] = data7
 
     return Response(json.dumps(data_list), mimetype='application/json')
 
@@ -699,4 +705,4 @@ def data_hippocampus_unet():
 
 
 if __name__ == '__main__':
-    app.run(debug=True,port=1128)
+    app.run(port=1128)

@@ -157,10 +157,13 @@
                             <p class="text-muted mb-4">选取图像</p>
                             <!-- 上传图片 -->
                             <form method="post" action="liveExperience/upload_success" enctype="multipart/form-data">
+                                <!-- 获取用户图片路径 -->
                                 <input type="file" style="color:#273444;background-color:#fff;" name="photo"/>
+                                <!-- 将路径传入后端 -->
                                 <input type="submit" class="btn btn-primary btn-icon btn-inner--text" value="确认" style="margin-left: 24px"/>
                             </form>
                             <div class="pt-3 pb-4">
+                                <!-- 从后端传入图片路径并展示 -->
                                 <img src="{{url_for('static', filename=pic_path)}}" class="img-fluid img-center" style="height: 180px;" alt="srcImg" />
                             </div>
                         </div>
@@ -174,6 +177,7 @@
                             <p class="text-muted mb-4">结果展示</p>
                             <!-- 选择算法，处理图片 -->
                              <div>
+                             <!-- 用默认的GET请求，传递算法名称 -->
                              <form action="upload_success/result">
                                  <select id="algorithm-one" style="color:#273444;background-color:#fff;">
                                      <option value="SOBEL">基于边界 SOBEL</option>
@@ -186,6 +190,7 @@
                              </form>
                              </div>
                             <div class="pt-3 pb-4">
+                                <!-- 获取处理完毕的图像 -->
                                 <img id="resPic" src="{{url_for('static', filename=res_pic_path)}}" class="img-fluid img-center" style="height: 180px;" alt="resImg" />
                             </div>
                         </div>

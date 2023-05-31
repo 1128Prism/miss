@@ -231,11 +231,12 @@
               <thead>
                 <tr>
                   <th style="text-align:center;vertical-align: middle"  scope="col">#</th>
-                  <th style="text-align:center;vertical-align: middle"  scope="col">sobel 基于边界</th>
+                  <th style="text-align:center;vertical-align: middle"  scope="col">SOBEL 基于边界</th>
                   <th style="text-align:center;vertical-align: middle"  scope="col">OTSU 基于阈值</th>
                   <th style="text-align:center;vertical-align: middle"  scope="col">WATERSHED 基于区域</th>
-                  <th style="text-align:center;vertical-align: middle"  scope="col">FCM 基于模糊集和聚类</th>
+                  <th style="text-align:center;vertical-align: middle"  scope="col">FCM 基于模糊聚类</th>
                   <th style="text-align:center;vertical-align: middle"  scope="col">DRLSE 基于可活动轮廓</th>
+                  <th style="text-align:center;vertical-align: middle"  scope="col">UNET 基于神经网络</th>
                 </tr>
               </thead>
               <tbody>
@@ -246,6 +247,7 @@
                     <td style="text-align:center;vertical-align: middle" >{{data3[0]}}</td>
                     <td style="text-align:center;vertical-align: middle" >{{data4[0]}}</td>
                     <td style="text-align:center;vertical-align: middle" >{{data5[0]}}</td>
+                    <td style="text-align:center;vertical-align: middle" >{{data6[0]}}</td>
                 </tr>
                 <tr>
                     <td style="text-align:center;vertical-align: middle" >{{header[1]}}</td>
@@ -254,6 +256,7 @@
                     <td style="text-align:center;vertical-align: middle" >{{data3[1]}}</td>
                     <td style="text-align:center;vertical-align: middle" >{{data4[1]}}</td>
                     <td style="text-align:center;vertical-align: middle" >{{data5[1]}}</td>
+                    <td style="text-align:center;vertical-align: middle" >{{data6[1]}}</td>
                 </tr>
                 <tr>
                     <td style="text-align:center;vertical-align: middle" >{{header[2]}}</td>
@@ -262,6 +265,7 @@
                     <td style="text-align:center;vertical-align: middle" >{{data3[2]}}</td>
                     <td style="text-align:center;vertical-align: middle" >{{data4[2]}}</td>
                     <td style="text-align:center;vertical-align: middle" >{{data5[2]}}</td>
+                    <td style="text-align:center;vertical-align: middle" >{{data6[2]}}</td>
                 </tr>
                 <tr>
                     <td style="text-align:center;vertical-align: middle" >{{header[3]}}</td>
@@ -270,6 +274,7 @@
                     <td style="text-align:center;vertical-align: middle" >{{data3[3]}}</td>
                     <td style="text-align:center;vertical-align: middle" >{{data4[3]}}</td>
                     <td style="text-align:center;vertical-align: middle" >{{data5[3]}}</td>
+                    <td style="text-align:center;vertical-align: middle" >{{data6[3]}}</td>
                 </tr>
               </tbody>
             </table>
@@ -368,6 +373,11 @@
               type: 'line',
               data: data['data6']
             },
+            {
+              name: 'UNET',
+              type: 'line',
+              data: data['data7']
+            },
           ]
         };
       if (option && typeof option === 'object') {
@@ -437,7 +447,7 @@
                         splitLine:{
                             lineStyle:{
                                 type:'dashed'
-                            }
+                            },
                         }
                       },
                   grid: {
@@ -478,6 +488,13 @@
                       stack: 'two',
                       emphasis: emphasisStyle,
                       data: data['data6']
+                    },
+                    {
+                      name: 'UNET',
+                      type: 'bar',
+                      stack: 'two',
+                      emphasis: emphasisStyle,
+                      data: data['data7']
                     }
                   ]
                 };
